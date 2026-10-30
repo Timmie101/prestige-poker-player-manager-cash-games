@@ -578,9 +578,13 @@ $('bulkWaitingSeatConfirm').addEventListener('click',()=>{
    state.players.push({id:state.nextId++,name:p.name,table,seat:item.seat,active:true,entry:1});
    state.history.push({action:'seated-from-waiting-list-bulk',name:p.name,table,seat:item.seat,game,at:new Date().toISOString()});
   }
-  state.waitingPlayers=state.waitingPlayers.filter(x=>x.id!==p.id);completed.push(p.name);
+  const gameNorm=String(game||'').normalize('NFKC').replace(/[\u00a0\u202f]/g,' ').trim().replace(/\s+/g,' ').toLocaleLowerCase('en-GB');
+  p.games=(Array.isArray(p.games)?p.games:[]).filter(g=>String(g||'').normalize('NFKC').replace(/[\u00a0\u202f]/g,' ').trim().replace(/\s+/g,' ').toLocaleLowerCase('en-GB')!==gameNorm);
+  if(p.games.length===0)state.waitingPlayers=state.waitingPlayers.filter(x=>x.id!==p.id);
+  state.history.push({action:'bulk-seat-waiting-player-game-updated',name:p.name,table,seat:item.seat,game,remainingGames:[...p.games],at:new Date().toISOString()});
+  completed.push(p.name);
  }
- closeBulkWaitingSeatModal();save();render();msg(`${completed.length} player(s) seated at Table ${table}: ${completed.join(', ')}.`);
+ closeBulkWaitingSeatModal();save();render();msg(`${completed.length} player(s) seated at Table ${table}: ${completed.join(', ')}. Players with other game preferences remain on the waiting list.`);
 });
 function closeTable(table){
  if(!Number.isInteger(table)||table<1||table>state.activeTables)return;
