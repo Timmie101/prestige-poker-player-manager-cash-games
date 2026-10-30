@@ -1,4 +1,4 @@
-const CACHE_NAME = 'prestige-cash-games-v98';
+const CACHE_NAME = 'prestige-cash-games-v116';
 const APP_SHELL = [
   './',
   './index.html',

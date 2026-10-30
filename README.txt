@@ -1,15 +1,9 @@
-Prestige Poker Player Manager - Cash Games v99
+Poker Player Manager - Cash Games
 
-This version adds a silver outer border to the existing Prestige Poker logo app icons and sets the iPad Home Screen label to “Cash Game”. The logo itself is preserved.
+Version: v116
 
-Upload ALL files and folders in this package to the ROOT of the GitHub repository:
-prestige-poker-player-manager-cash-games
+Complete offline-capable app package, including the web app, service worker, manifest and install icons.
 
-Required root contents:
-- index.html
-- manifest.webmanifest
-- sw.js
-- icons/ (folder with three PNG icons)
+To update the existing GitHub Pages repository, upload all files and folders in this package, replacing the existing files. Keep a backup of the current repository first.
 
-Do not upload the containing cash_games_app_v99 folder itself. Upload its contents.
-After GitHub Pages republishes, remove the old Home Screen shortcut and add the website to the Home Screen again so the new icon and standalone settings are picked up.
+Player/session data is stored locally by the app in the browser on each device. It is not included in this ZIP package.
